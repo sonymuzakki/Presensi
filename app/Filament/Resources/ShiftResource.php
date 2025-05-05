@@ -18,18 +18,24 @@ class ShiftResource extends Resource
     protected static ?string $model = Shift::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
-    protected static ?int $navigationSort=2;
+    protected static ?int $navigationSort = 2;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TimePicker::make('start_time')
-                    ->required(),
-                Forms\Components\TimePicker::make('end_time')
-                    ->required(),
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('Shift')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\TimePicker::make('start_time')
+                                    ->required(),
+                                Forms\Components\TimePicker::make('end_time')
+                                    ->required(),
+                            ])
+                    ])
             ]);
     }
 

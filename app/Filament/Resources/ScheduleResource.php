@@ -23,16 +23,31 @@ class ScheduleResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->searchable()
-                    ->required(),
-                Forms\Components\Select::make('shift_id')
-                    ->relationship('shift', 'name')
-                    ->required(),
-                Forms\Components\Select::make('office_id')
-                    ->relationship('office', 'name')
-                    ->required(),
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('Schedule')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\DatePicker::make('date')
+                                    ->required(),
+                                Forms\Components\TimePicker::make('start_time')
+                                    ->required(),
+                                Forms\Components\TimePicker::make('end_time')
+                                    ->required(),
+                            ])
+                    ]),
+                // Forms\Components\Select::make('user_id')
+                //     ->relationship('user', 'name')
+                //     ->searchable()
+                //     ->required(),
+                // Forms\Components\Select::make('shift_id')
+                //     ->relationship('shift', 'name')
+                //     ->required(),
+                // Forms\Components\Select::make('office_id')
+                //     ->relationship('office', 'name')
+                //     ->required(),
             ]);
     }
 
